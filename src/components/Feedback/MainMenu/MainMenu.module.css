@@ -1,0 +1,27 @@
+
+
+.btn_menu{
+  background-color:white;
+  border-radius: 15px;
+  border: none;
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+  color: black;
+  padding: 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: capitalize;
+  cursor: pointer;
+  font-size: 26px;}
+
+.btn_menu:active{
+  background-color: blue;
+  scale: 1.15;
+  box-shadow: 8px 8px 8px 1px rgba(0, 0, 255, .2);
+  
+}
+
+.list_menu{
+display: flex;
+gap: 15px;}
+
