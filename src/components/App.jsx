@@ -1,46 +1,40 @@
-import { Component } from 'react';
+import { useState } from 'react';
 
 import MainMenu from './Feedback/MainMenu/MainMenu';
 import Results from './Feedback/Results/Results';
 import Block from './Feedback/Block/Block';
 import Notification from './Feedback/Notification/Notification';
 
-class App extends Component {
-  state = { good: 0, neutral: 0, bad: 0 };
+const App = () => {
+   const [state, setState] = useState({ good: 0, neutral: 0, bad: 0 });
 
-  addValue = keyName => {
-    this.setState(prevState => {
-      return {
-        [keyName]: prevState[keyName] + 1,
-      };
-    });
-  };
-
-  countTotalFeedback() {
-    const { good, neutral, bad } = this.state;
+   const addValue = (keyName) => {
+     setState (prevState => ({...prevState,[keyName]: prevState[keyName] + 1 })) }
+    
+   const countTotalFeedback=()=> {
+    const { good, neutral, bad } = state;
     const total = good + neutral + bad;
     return total;
-  }
-  countPositiveFeedbackPercentage() {
-    const total = this.countTotalFeedback();
-    if (!total) {
-      return 0;
-    }
+   }
+   const PositiveFeedbackPercentage =()=> {
+      const total = countTotalFeedback();
+      if (!total) {
+       return 0;
+        }
+       const value = state.good;
+      return Number(((value / total) * 100).toFixed(2));
+       }
 
-    const value = this.state.good;
-    return Number(((value / total) * 100).toFixed(2));
-  }
-  render() {
-    const { good, neutral, bad } = this.state;
-    const nameBtn = Object.keys(this.state);
+    const { good, neutral, bad } = state;
+    const nameBtn = Object.keys(state);
 
-    const total = this.countTotalFeedback();
-    const positive = this.countPositiveFeedbackPercentage();
+    const total = countTotalFeedback();
+    const positive = PositiveFeedbackPercentage();
 
     return (
       <div>
         <Block title=" Please leave feedback">
-          <MainMenu options={nameBtn} addValue={this.addValue} />
+          <MainMenu options={nameBtn} addValue={addValue} />
         </Block>
 
         <Block title=" Statistic">
@@ -59,6 +53,6 @@ class App extends Component {
       </div>
     );
   }
-}
+
 
 export { App };
